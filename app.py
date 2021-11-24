@@ -4,17 +4,6 @@ import controller,GetDb
 import threading
 
 
-# def job():
-#     print ("I'm working...")
-#     return
-#
-#
-# schedule.every().minute.at(":17").do(job)
-# schedule.every().day.at("01:00").do(job,'It is 01:00')
-#
-# while True:
-#     schedule.run_pending()
-#     time.sleep(60) # wait one minute
 
 t1 = threading.Thread(target=GetDb.update_data(), args=(10,))
 t1.run()
