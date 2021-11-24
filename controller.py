@@ -5,6 +5,9 @@ import json
 data = GetDb.read_file()
 
 
+# The function get name of category relevant
+# with pandas libary take only the column
+# return data frame of the relevant column of the category
 def list_category(name_category):
     for category in data:
         if category['categoryName'] == name_category:
@@ -16,6 +19,9 @@ def list_category(name_category):
     return list_of_category
 
 
+# The function get all list of the category and id
+# search the id in the category
+# return the item
 def list_by_id(all_list, iid):
     iid = int(iid)
     for i in all_list:
@@ -23,6 +29,8 @@ def list_by_id(all_list, iid):
             return i
     return '-1'
 
+
+# get data frame and return json after drop id column
 def parse_get_all(df):
     df = pd.DataFrame(df)
     df = df[['dishName', 'dishDescription', 'dishPrice']]
@@ -77,8 +85,10 @@ def get_desert(iid):
     return get_drop_list(list_desert)
 
 
-
-def priceByCategory(json_file,category_name):
+# The function get the json and the name of the category
+# search the list of the category
+# calculate the sum of each category and return it
+def price_by_category(json_file,category_name):
     sum_price=0
     category = json_file[category_name]
     for iid in category:
@@ -94,9 +104,9 @@ def priceByCategory(json_file,category_name):
 
 def price(json_file):
     sum_price = 0
-    sum_price+=priceByCategory(json_file, 'drinks')
-    sum_price += priceByCategory(json_file, 'pizzas')
-    sum_price += priceByCategory(json_file, 'desserts')
+    sum_price+=price_by_category(json_file, 'drinks')
+    sum_price += price_by_category(json_file, 'pizzas')
+    sum_price += price_by_category(json_file, 'desserts')
 
     return sum_price
 
