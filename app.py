@@ -1,7 +1,23 @@
 import flask
 from flask import Flask, jsonify, request, render_template
-import controller,order
+import controller,GetDb
+import threading
 
+
+# def job():
+#     print ("I'm working...")
+#     return
+#
+#
+# schedule.every().minute.at(":17").do(job)
+# schedule.every().day.at("01:00").do(job,'It is 01:00')
+#
+# while True:
+#     schedule.run_pending()
+#     time.sleep(60) # wait one minute
+
+t1 = threading.Thread(target=GetDb.update_data(), args=(10,))
+t1.run()
 
 app = Flask(__name__)
 
@@ -49,7 +65,7 @@ def get_dessert_by_id(id):
 
 
 # POST /order - receives an order and returns its total price.
-@app.route('/order', methods = ['POST','GET'])
+@app.route('/order', methods = ['POST'])
 def order():
     if flask.request.method == 'POST':
         data = request.get_json()

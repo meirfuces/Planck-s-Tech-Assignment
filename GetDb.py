@@ -2,12 +2,13 @@
 
 import requests
 import json
-
+import schedule
 
 url ="https://www.10bis.co.il/NextApi/GetRestaurantMenu?culture=en&uiCulture=en&restaurantId=19156&deliveryMethod=pickup "
 
 
 def update_data():
+    schedule.every().day.at("02:00").do(update_data)
     print('update')
     response = requests.get(url)
     all_data_json = response.json()
