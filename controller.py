@@ -65,9 +65,9 @@ def get_drink(iid):
 
 # get pizza with id
 def get_pizza(iid):
-    drink_list = list_category('Pizzas')
-    list_drink = list_by_id(drink_list, iid)
-    return get_drop_list(list_drink)
+    pizzas_list = list_category('Pizzas')
+    list_pizza= list_by_id(pizzas_list, iid)
+    return get_drop_list(list_pizza)
 
 
 # get dessert with id
@@ -75,3 +75,31 @@ def get_desert(iid):
     desert_list = list_category('Desserts')
     list_desert = list_by_id(desert_list, iid)
     return get_drop_list(list_desert)
+
+
+def get_price_by_id(obj):
+    print(obj)
+    print (obj[2])
+    return int(obj[2])
+# def id_loop(list_id):
+#     for iid in list_id:
+
+
+def price(json_file):
+    sum_price = 0
+    drinks_id = json_file['drinks']
+    for iid in drinks_id:
+        drink = get_drink(iid)
+        sum_price+=get_price_by_id(drink)
+    pizzas_id = json_file['pizzas']
+    for iid in pizzas_id:
+        pizza = get_pizza(iid)
+        sum_price += get_price_by_id(pizza)
+
+    desserts_id = json_file['desserts']
+    for iid in desserts_id:
+        dessert = get_desert(iid)
+        sum_price+=get_price_by_id(dessert)
+
+    return sum_price
+
